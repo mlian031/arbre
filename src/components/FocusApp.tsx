@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Calendar, ChevronRight, ChevronLeft, Play, Pause, RefreshCcw, BarChart } from 'lucide-react';
+import { Timer, Calendar, ChevronRight, ChevronLeft, Play, Pause, RefreshCcw, BarChart } from 'lucide-react';
 
 const FocusApp = () => {
   const [time, setTime] = useState(25 * 60);
@@ -137,10 +137,13 @@ const FocusApp = () => {
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-1">
-            <h1 className="text-2xl font-medium text-gray-100">Nexus</h1>
+            <h1 className="text-2xl font-medium text-gray-100">Arbe. (A study app)</h1>
             <span className="text-sm text-blue-400/80 font-medium px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20">Beta</span>
           </div>
-          <p className="text-sm text-gray-500">Cognitive-optimized study planning</p>
+          <div className="flex items-center space-x-2 text-sm text-gray-400">
+            <Timer size={16} />
+            <span>{schedule[currentTask].time}</span>
+          </div>
         </div>
 
         <div className="grid gap-6">
