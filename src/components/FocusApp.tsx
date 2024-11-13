@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Timer, Calendar, ChevronRight, ChevronLeft, Play, Pause, RefreshCcw, BarChart } from 'lucide-react';
+import { Calendar, ChevronRight, ChevronLeft, Play, Pause, RefreshCcw, BarChart } from 'lucide-react';
 
 const FocusApp = () => {
   const [time, setTime] = useState(25 * 60);
