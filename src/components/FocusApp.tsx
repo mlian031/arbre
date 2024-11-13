@@ -7,7 +7,6 @@ const FocusApp = () => {
   const [isActive, setIsActive] = useState(false);
   const [currentTask, setCurrentTask] = useState(0);
   const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
-  const [showStats, setShowStats] = useState(false);
 
   const schedule = [
     { 
@@ -103,10 +102,10 @@ const FocusApp = () => {
   ];
 
   useEffect(() => {
-    let intervalId: number | undefined;
+    let intervalId: NodeJS.Timeout | undefined;
 
     if (isActive && time > 0) {
-      intervalId = window.setInterval(() => {
+      intervalId = setInterval(() => {
         setTime(time => time - 1);
       }, 1000);
     } else if (time === 0) {
@@ -115,35 +114,33 @@ const FocusApp = () => {
     }
 
     return () => {
-      if (intervalId !== undefined) {
-        window.clearInterval(intervalId);
-      }
+      if (intervalId) clearInterval(intervalId);
     };
   }, [isActive, time]);
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const toggleTimer = () => setIsActive(!isActive);
-  const resetTimer = () => {
+  const toggleTimer = (): void => setIsActive(!isActive);
+  const resetTimer = (): void => {
     setIsActive(false);
     setTime(25 * 60);
   };
-  const nextTask = () => setCurrentTask(prev => Math.min(prev + 1, schedule.length - 1));
-  const prevTask = () => setCurrentTask(prev => Math.max(prev - 1, 0));
+  const nextTask = (): void => setCurrentTask(prev => Math.min(prev + 1, schedule.length - 1));
+  const prevTask = (): void => setCurrentTask(prev => Math.max(prev - 1, 0));
 
   return (
     <div className="min-h-screen bg-[#1C1C1C] text-gray-300 p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8 space-y-2">
-          <h1 className="text-2xl font-medium text-gray-100">Arbre. (A focus timer)</h1>
-          <div className="flex items-center space-x-2 text-sm text-gray-400">
-            <Timer size={16} />
-            <span>{schedule[currentTask].time}</span>
+        <div className="mb-8">
+          <div className="flex items-center space-x-3 mb-1">
+            <h1 className="text-2xl font-medium text-gray-100">Nexus</h1>
+            <span className="text-sm text-blue-400/80 font-medium px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20">Beta</span>
           </div>
+          <p className="text-sm text-gray-500">Cognitive-optimized study planning</p>
         </div>
 
         <div className="grid gap-6">
